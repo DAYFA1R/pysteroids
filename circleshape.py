@@ -1,5 +1,5 @@
+from __future__ import annotations
 import pygame
-
 
 # Base class for game objects
 class CircleShape(pygame.sprite.Sprite):
@@ -13,6 +13,12 @@ class CircleShape(pygame.sprite.Sprite):
     self.position = pygame.Vector2(x, y)
     self.velocity = pygame.Vector2(0, 0)
     self.radius = radius
+    
+  def collision(self, other: CircleShape) -> bool:
+    distance = self.position.distance_to(other.position)
+    if distance > (self.radius + other.radius):
+      return False
+    return True
 
   def draw(self, screen):
     # sub-classes must override
